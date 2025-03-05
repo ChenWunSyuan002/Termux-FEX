@@ -1,3 +1,5 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
 # v1.0.1
 
 # -------------------------
@@ -40,7 +42,7 @@ ${INSTALL_DIR}/debian-amd64/home:/home
 /proc:/proc
 /dev:/dev
 /sys:/sys
-/linkerconfig:/linkerconfig
+/linkerconfig/ld.config.txt:/linkerconfig/ld.config.txt
 ${INSTALL_DIR}/vulkan:/vulkan
 ${INSTALL_DIR}/fake/stat:/proc/stat
 ${INSTALL_DIR}/fake/vmstat:/proc/vmstat
