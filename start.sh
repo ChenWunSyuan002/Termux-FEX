@@ -870,7 +870,7 @@ apt upgrade -y $APT_ARGS
 apt update -y $APT_ARGS
 apt install --reinstall coreutils passwd -y $APT_ARGS
 apt install libvulkan1 libvulkan-dev -y $APT_ARGS
-apt install ./mesa-vulkan-kgsl_24.1.0-devel-20240422_amd64.deb -y $APT_ARGS
+apt install ./mesa-vulkan-kgsl_24.1.0-devel-20240422_amd64.deb -y --allow-downgrades $APT_ARGS
 touch /debug/vulkan_installed
 EOF
   unset LD_PRELOAD
