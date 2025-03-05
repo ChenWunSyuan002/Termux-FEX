@@ -193,7 +193,7 @@ if [[ ! -d "${INSTALL_DIR}" ]]; then
 fi
 
 # The FEX variable is just a shortened version for the path to the fex install
-export FEX=".fex-emu/RootFS/Debian_Bookworm"
+export FEX=".fex-emu/RootFS/Debian_Trixie"
 # Our base args (AMD64)
 export ARGS="-b ${INSTALL_DIR}/debian-amd64:/home/main/$FEX/ -b ${INSTALL_DIR}/debian-amd64:/root/$FEX/ -b ${INSTALL_DIR}/FEX:/home/main/.fex-emu -b ${INSTALL_DIR}/FEX:/root/.fex-emu"
 
@@ -984,7 +984,7 @@ EOF
   /bin/bash /install_fex.sh
   # Fix our RootFS
 cat <<- EOF > "${INSTALL_DIR}/FEX/Config.json"
-{"Config": {"RootFS": "Debian_Bookworm"}}
+{"Config": {"RootFS": "Debian_Trixie"}}
 EOF
   rm -rf "${INSTALL_DIR}/debian-arm64/install_fex.sh"
 fi
