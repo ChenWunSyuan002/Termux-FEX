@@ -484,7 +484,7 @@ if [[ ! -d "${INSTALL_DIR}/debian-arm64" ]]; then
   --variant=minbase \
   --exclude=systemd \
   --arch=arm64 \
-  bookworm \
+  trixie \
   "${INSTALL_DIR}/debian-arm64" \
   http://ftp.debian.org/debian/
 fi
@@ -501,7 +501,7 @@ if [[ ! -d "${INSTALL_DIR}/debian-amd64" ]]; then
   --variant=minbase \
   --exclude=systemd \
   --arch=amd64 \
-  bookworm \
+  trixie \
   "${INSTALL_DIR}/debian-amd64" \
   http://ftp.debian.org/debian/
   # Add our user files (These aren't properly created)
@@ -794,44 +794,26 @@ if [[ ! -d "${INSTALL_DIR}/debian-arm64/debug" ]]; then
   mkdir "${INSTALL_DIR}/debian-arm64/debug"
 fi
 
-# Update arm64 sources.list (For bookworm!)
+# Update arm64 sources.list (For trixie!)
 cat <<- EOF > "${INSTALL_DIR}/debian-arm64/etc/apt/sources.list"
-deb http://deb.debian.org/debian bookworm contrib main non-free non-free-firmware
-deb-src http://deb.debian.org/debian bookworm contrib main non-free non-free-firmware
+deb http://deb.debian.org/debian trixie contrib main non-free non-free-firmware
+deb-src http://deb.debian.org/debian trixie contrib main non-free non-free-firmware
 
-deb http://deb.debian.org/debian bookworm-updates contrib main non-free non-free-firmware
-deb-src http://deb.debian.org/debian bookworm-updates contrib main non-free non-free-firmware
+deb http://deb.debian.org/debian trixie-updates contrib main non-free non-free-firmware
+deb-src http://deb.debian.org/debian trixie-updates contrib main non-free non-free-firmware
 
-deb http://deb.debian.org/debian bookworm-proposed-updates contrib main non-free non-free-firmware
-deb-src http://deb.debian.org/debian bookworm-proposed-updates contrib main non-free non-free-firmware
+deb http://deb.debian.org/debian trixie-proposed-updates contrib main non-free non-free-firmware
+deb-src http://deb.debian.org/debian trixie-proposed-updates contrib main non-free non-free-firmware
 
-deb http://deb.debian.org/debian bookworm-backports contrib main non-free non-free-firmware
-deb-src http://deb.debian.org/debian bookworm-backports contrib main non-free non-free-firmware
+deb http://deb.debian.org/debian trixie-backports contrib main non-free non-free-firmware
+deb-src http://deb.debian.org/debian trixie-backports contrib main non-free non-free-firmware
 
-deb http://deb.debian.org/debian-security/ bookworm-security contrib main non-free non-free-firmware
-deb-src http://deb.debian.org/debian-security/ bookworm-security contrib main non-free non-free-firmware
+deb http://deb.debian.org/debian-security/ trixie-security contrib main non-free non-free-firmware
+deb-src http://deb.debian.org/debian-security/ trixie-security contrib main non-free non-free-firmware
 EOF
 
-# Update amd64 sources.list (For bookworm!)
+# Update amd64 sources.list (For trixie!)
 cat <<- EOF > "${INSTALL_DIR}/debian-amd64/etc/apt/sources.list"
-deb http://deb.debian.org/debian bookworm contrib main non-free non-free-firmware
-deb-src http://deb.debian.org/debian bookworm contrib main non-free non-free-firmware
-
-deb http://deb.debian.org/debian bookworm-updates contrib main non-free non-free-firmware
-deb-src http://deb.debian.org/debian bookworm-updates contrib main non-free non-free-firmware
-
-deb http://deb.debian.org/debian bookworm-proposed-updates contrib main non-free non-free-firmware
-deb-src http://deb.debian.org/debian bookworm-proposed-updates contrib main non-free non-free-firmware
-
-deb http://deb.debian.org/debian bookworm-backports contrib main non-free non-free-firmware
-deb-src http://deb.debian.org/debian bookworm-backports contrib main non-free non-free-firmware
-
-deb http://deb.debian.org/debian-security/ bookworm-security contrib main non-free non-free-firmware
-deb-src http://deb.debian.org/debian-security/ bookworm-security contrib main non-free non-free-firmware
-EOF
-
-# Add trixie sources for amd64 (For up-to-date packages)
-cat <<- EOF > "${INSTALL_DIR}/debian-amd64/etc/apt/sources.list.d/trixie.list"
 deb http://deb.debian.org/debian trixie contrib main non-free non-free-firmware
 deb-src http://deb.debian.org/debian trixie contrib main non-free non-free-firmware
 
@@ -846,33 +828,6 @@ deb-src http://deb.debian.org/debian trixie-backports contrib main non-free non-
 
 deb http://deb.debian.org/debian-security/ trixie-security contrib main non-free non-free-firmware
 deb-src http://deb.debian.org/debian-security/ trixie-security contrib main non-free non-free-firmware
-EOF
-
-# Add trixie sources for arm64 (For up-to-date packages)
-cat <<- EOF > "${INSTALL_DIR}/debian-arm64/etc/apt/sources.list.d/trixie.list"
-deb http://deb.debian.org/debian trixie contrib main non-free non-free-firmware
-deb-src http://deb.debian.org/debian trixie contrib main non-free non-free-firmware
-
-deb http://deb.debian.org/debian trixie-updates contrib main non-free non-free-firmware
-deb-src http://deb.debian.org/debian trixie-updates contrib main non-free non-free-firmware
-
-deb http://deb.debian.org/debian trixie-proposed-updates contrib main non-free non-free-firmware
-deb-src http://deb.debian.org/debian trixie-proposed-updates contrib main non-free non-free-firmware
-
-deb http://deb.debian.org/debian trixie-backports contrib main non-free non-free-firmware
-deb-src http://deb.debian.org/debian trixie-backports contrib main non-free non-free-firmware
-
-deb http://deb.debian.org/debian-security/ trixie-security contrib main non-free non-free-firmware
-deb-src http://deb.debian.org/debian-security/ trixie-security contrib main non-free non-free-firmware
-EOF
-
-# This is needed for "libelf1t64" (Required by our custom mesa drivers)
-cat <<- EOF > "${INSTALL_DIR}/debian-amd64/etc/apt/sources.list.d/mesa_compatibility.list"
-deb http://deb.debian.org/debian sid main
-EOF
-
-cat <<- EOF > "${INSTALL_DIR}/debian-arm64/etc/apt/sources.list.d/mesa_compatibility.list"
-deb http://deb.debian.org/debian sid main
 EOF
 
 # Add our /start_fex.sh script
